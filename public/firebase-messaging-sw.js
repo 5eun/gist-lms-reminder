@@ -2,13 +2,13 @@ importScripts("/firebase-app-compat.js");
 importScripts("/firebase-messaging-compat.js");
 
 firebase.initializeApp({
-  apiKey: "AIzaSyCNOd5AM7WBQkxJXYU9Uyz31Z0RvWiKW58",
-  authDomain: "gist-lms-reminder.firebaseapp.com",
-  projectId: "gist-lms-reminder",
-  storageBucket: "gist-lms-reminder.firebasestorage.app",
-  messagingSenderId: "880293658634",
-  appId: "1:880293658634:web:8de7ffc563be1270759ff3",
-  measurementId: "G-T58WT1MCKC",
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
+  measurementId: "",
 });
 
 const messaging = firebase.messaging();
