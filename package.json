@@ -1,0 +1,50 @@
+{
+  "name": "gist-lms-reminder",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "copy:firebase-worker": "cp node_modules/firebase/firebase-app-compat.js public/firebase-app-compat.js && cp node_modules/firebase/firebase-messaging-compat.js public/firebase-messaging-compat.js",
+    "predev": "npm run copy:firebase-worker",
+    "dev": "next dev",
+    "prebuild": "npm run copy:firebase-worker",
+    "build": "next build",
+    "start": "next start",
+    "postinstall": "prisma generate",
+    "lint": "eslint",
+    "test:lms": "TS_NODE_COMPILER_OPTIONS=\"{\\\"module\\\":\\\"CommonJS\\\",\\\"moduleResolution\\\":\\\"Node\\\"}\" ts-node --transpile-only scripts/test-lms.ts",
+    "test:sync": "TS_NODE_COMPILER_OPTIONS=\"{\\\"module\\\":\\\"CommonJS\\\",\\\"moduleResolution\\\":\\\"Node\\\"}\" ts-node --transpile-only scripts/test-sync.ts",
+    "test:assignments": "TS_NODE_COMPILER_OPTIONS=\"{\\\"module\\\":\\\"CommonJS\\\",\\\"moduleResolution\\\":\\\"Node\\\"}\" ts-node --transpile-only scripts/test-assignments.ts",
+    "test:assignment-parser": "TS_NODE_COMPILER_OPTIONS=\"{\\\"module\\\":\\\"CommonJS\\\",\\\"moduleResolution\\\":\\\"Node\\\"}\" ts-node --transpile-only scripts/test-assignment-parser.ts",
+    "test:reminders": "TS_NODE_COMPILER_OPTIONS=\"{\\\"module\\\":\\\"CommonJS\\\",\\\"moduleResolution\\\":\\\"Node\\\"}\" ts-node -r dotenv/config --transpile-only scripts/test-reminders.ts",
+    "test:push-tokens": "TS_NODE_COMPILER_OPTIONS=\"{\\\"module\\\":\\\"CommonJS\\\",\\\"moduleResolution\\\":\\\"Node\\\"}\" ts-node -r dotenv/config --transpile-only scripts/test-push-tokens.ts",
+    "test:push-notifications": "TS_NODE_COMPILER_OPTIONS=\"{\\\"module\\\":\\\"CommonJS\\\",\\\"moduleResolution\\\":\\\"Node\\\"}\" ts-node -r dotenv/config --transpile-only scripts/test-push-notifications.ts",
+    "test:scheduled-reminder": "TS_NODE_COMPILER_OPTIONS=\"{\\\"module\\\":\\\"CommonJS\\\",\\\"moduleResolution\\\":\\\"Node\\\"}\" ts-node -r dotenv/config --transpile-only scripts/test-scheduled-reminder.ts",
+    "push:test": "TS_NODE_COMPILER_OPTIONS=\"{\\\"module\\\":\\\"CommonJS\\\",\\\"moduleResolution\\\":\\\"Node\\\"}\" ts-node -r dotenv/config --transpile-only scripts/send-test-push.ts"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "^7.10.0",
+    "@prisma/client": "^7.10.0",
+    "axios": "^1.20.0",
+    "axios-cookiejar-support": "^7.0.0",
+    "cheerio": "^1.2.0",
+    "dotenv": "^17.4.2",
+    "firebase": "12.18.0",
+    "firebase-admin": "14.3.0",
+    "next": "16.3.4",
+    "node-cron": "^4.6.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "tough-cookie": "^6.0.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.4",
+    "prisma": "^7.10.0",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

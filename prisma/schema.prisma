@@ -1,0 +1,62 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum AssignmentStatus {
+  SUBMITTED
+  NOT_SUBMITTED
+  UNKNOWN
+}
+
+enum ReminderThreshold {
+  H24
+  H6
+  H1
+}
+
+model Course {
+  id          String       @id
+  name        String
+  professor   String?
+  url         String
+  assignments Assignment[]
+}
+
+model Assignment {
+  id        String           @id
+  courseId  String
+  title     String
+  url       String
+  dueAt     DateTime?        @db.Timestamptz(3)
+  status    AssignmentStatus
+  course    Course           @relation(fields: [courseId], references: [id])
+  reminders Reminder[]
+}
+
+model Reminder {
+  id           String            @id @default(cuid())
+  assignmentId String
+  threshold    ReminderThreshold
+  sentAt       DateTime?         @db.Timestamptz(3)
+  assignment   Assignment        @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+
+  @@unique([assignmentId, threshold])
+}
+
+model PushToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
+}
+
+model SyncStatus {
+  id           String   @id
+  lastSyncTime DateTime @db.Timestamptz(3)
+}
